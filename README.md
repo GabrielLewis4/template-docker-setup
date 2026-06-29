@@ -51,7 +51,7 @@ Install these before starting:
 
 ## First-time setup
 
-Do these steps once. After that, daily use is just opening VSCode.
+Do these steps once. After that, daily use is just opening VSCode (see below).
 
 ### Step 1: Install Git
 
