@@ -12,21 +12,8 @@ harmful).
 - Quarto for documents, articles, and presentations
 - Claude Code (Anthropic's AI coding assistant)
 - Full internet access for web search and APIs
-- A designated folder on your Mac for data files that don't go to GitHub
+- A designated folder on your Mac for data files that don't go to GitHub but Claude can access
 - All your work persists across restarts
-
----
-
-## What you need to know about GitHub
-
-GitHub is a website where people store and share code. Think of it like Google Drive but
-for code projects. This repository (which is what GitHub calls a folder of files) contains
-everything needed to set up your environment.
-
-**Cloning** means downloading a copy of a repository to your computer. You do this once
-and then the files live on your Mac.
-
----
 
 ## Prerequisites
 
