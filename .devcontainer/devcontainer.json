@@ -1,0 +1,32 @@
+{
+  "name": "claude-sandbox",
+  "build": { "dockerfile": "Dockerfile" },
+
+  // Pass your Anthropic API key in from your Mac's environment.
+  // Set it on your Mac with: echo 'export ANTHROPIC_API_KEY=sk-ant-...' >> ~/.zshrc
+  "containerEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+
+  // Persist your home directory (SSH keys, git config, R/Python packages, cloned repos)
+  // across container rebuilds. Also mount your local data folder at /data.
+  "mounts": [
+    "source=claude-sandbox-home,target=/root,type=volume",
+    "source=${localEnv:HOME}/claude-data,target=/data,type=bind"
+  ],
+
+  // Copy the CLAUDE.md template to ~/.claude/ on first setup, if not already there.
+  "postCreateCommand": "mkdir -p ~/.claude && [ -f ~/.claude/CLAUDE.md ] || cp /workspaces/claude-sandbox/CLAUDE.md ~/.claude/CLAUDE.md",
+
+  // VSCode extensions installed inside the container.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "REditorSupport.r",
+        "ms-python.python",
+        "quarto.quarto"
+      ]
+    }
+  }
+}
