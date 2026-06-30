@@ -12,7 +12,7 @@
   // across container rebuilds. Also mount your local data folder at /data.
   "mounts": [
     "source=claude-sandbox-home,target=/root,type=volume",
-    "source=${localEnv:HOME}/claude-data,target=/data,type=bind"
+    "source=${localEnv:HOME}/Developer/claude-data,target=/data,type=bind"
   ],
 
   // Copy the CLAUDE.md template to ~/.claude/ on first setup, if not already there.
