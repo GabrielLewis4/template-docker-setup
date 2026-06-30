@@ -12,8 +12,71 @@ harmful).
 - Quarto for documents, articles, and presentations
 - Claude Code (Anthropic's AI coding assistant)
 - Full internet access for web search and APIs
-- A designated folder on your Mac for data files that don't go to GitHub but Claude can access
+- A designated folder on your Mac for data files that don't go to GitHub
 - All your work persists across restarts
+
+---
+
+## How the pieces fit together
+
+It helps to understand what lives where before you start.
+
+**On your Mac:**
+```
+~/claude-setup/              ← this repo; used to launch the container, not for working in
+  .devcontainer/
+    Dockerfile
+    devcontainer.json
+  CLAUDE.md
+  README.md
+
+~/claude-data/               ← data files you want Claude to access but not push to GitHub
+                               (appears as /data inside the container)
+```
+
+**Inside the container:**
+```
+/root/                       ← your home directory inside the container
+  mirror_tsd/                ← a project, cloned from GitHub
+  other-project/             ← another project, cloned from GitHub
+  .claude/                   ← Claude Code config (CLAUDE.md lives here)
+  .ssh/                      ← your SSH keys for GitHub access
+  .gitconfig                 ← your git identity (name and email)
+
+/workspaces/claude-setup/    ← the setup repo mounted into the container
+                               ignore this; you don't work here
+
+/data/                       ← your ~/claude-data folder from your Mac, mounted in
+```
+
+**On GitHub:**
+```
+claude-setup                 ← this repo (the template)
+mirror_tsd                   ← a project repo
+other-project                ← another project repo
+```
+
+The key things to remember:
+- You work in `/root/yourproject` inside the container, not in `/workspaces/`
+- `/workspaces/claude-setup` is just the ignition key — it starts the container but you
+  don't work in it
+- Projects live inside the container, cloned from GitHub. Your Mac's files (other than
+  `/data`) are not accessible.
+- Everything under `/root/` persists across container restarts because it is backed by a
+  Docker volume.
+
+---
+
+## What you need to know about GitHub
+
+GitHub is a website where people store and share code. Think of it like Google Drive but
+for code projects. This repository (which is what GitHub calls a folder of files) contains
+everything needed to set up your environment.
+
+**Cloning** means downloading a copy of a repository to your computer. You do this once
+and then the files live on your Mac.
+
+---
 
 ## Prerequisites
 
@@ -38,7 +101,7 @@ Install these before starting:
 
 ## First-time setup
 
-Do these steps once. After that, daily use is just opening VSCode (see below).
+Do these steps once. After that, daily use is just opening VSCode.
 
 ### Step 1: Install Git
 
