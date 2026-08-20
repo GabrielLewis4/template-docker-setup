@@ -25,6 +25,11 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libtiff5-dev \
     libjpeg-dev \
+    texlive-latex-extra \
+    texlive-pictures \
+    texlive-fonts-recommended \
+    texlive-science \
+    latexmk \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Claude Code
